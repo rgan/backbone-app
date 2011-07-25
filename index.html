@@ -1,0 +1,54 @@
+<script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="lib/underscore_1.1.7.js"></script>
+<script type="text/javascript" src="lib/backbone_0.5.1.js"></script>
+<script type="text/javascript" src="lib/handlebars.1.0.0.beta.3.js"></script>
+
+<script type="text/javascript" src="src/view/spreadsheet_view.js"></script>
+<script type="text/javascript" src="src/model/spreadsheet.js"></script>
+
+<script type="text/javascript">
+
+    $(function() {
+
+        var firstColumn = new SpreadsheetColumn({ "name" : "col1"})
+        var secondColumn = new SpreadsheetColumn({ "name" : "col2"})
+        var aCell = new SpreadsheetCell({"column" : firstColumn, "value": "v1"})
+        var anotherCell = new SpreadsheetCell({"column" : secondColumn, "value": "v2"})
+        var aRow = new SpreadsheetRow([aCell, anotherCell]);
+        var aSpreadsheet = new Spreadsheet();
+        aSpreadsheet.add(aRow)
+
+        var app = new SpreadsheetView({ model: aSpreadsheet });
+        app.render();
+    });
+
+</script>
+
+<body>
+
+<h2>Spreadsheet</h2>
+
+<div id="spreadsheetapp">
+
+</div>
+
+<script type="text/template" id="spreadsheet-template">
+    <table>
+        <tr>
+            {{#columns}}
+            <td>{{name}}</td>
+            {{/columns}}
+        </tr>
+        {{#rows}}
+        <tr>
+            {{#cells}}
+            <td>{{value}}</td>
+            {{/cells}}
+        </tr>
+        {{/rows}}
+    </table>
+</script>
+
+</body>
+
+
